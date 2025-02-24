@@ -1,13 +1,14 @@
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables from .env
+console.log("Loaded API Key:", process.env.OPENAI_API_KEY ? "Exists" : "Not Found");
+
 const express = require("express");
 const cors = require("cors");
 const OpenAI = require("openai");
 
 const app = express();
-app.use(cors({ origin: "http://127.0.0.1:5500" }));
-app.use(express.json());
+const PORT = 3000;
 
-// Ensure API Key is Loaded
+// Ensure API Key is loaded
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {
     console.error("❌ ERROR: Missing OpenAI API Key! Set OPENAI_API_KEY in .env file.");
@@ -16,9 +17,14 @@ if (!apiKey) {
 
 const openai = new OpenAI({ apiKey });
 
+// Middleware
+app.use(cors()); // Enable CORS for frontend requests
+app.use(express.json()); // Parse JSON requests
+
+// Chinese Zodiac API Endpoint
 app.post("/zodiac", async (req, res) => {
     const { birthYear } = req.body;
-    
+
     if (!birthYear) {
         return res.status(400).json({ error: "Birth year is required" });
     }
@@ -38,9 +44,13 @@ app.post("/zodiac", async (req, res) => {
                     role: "user",
                     content: `Provide a direct response for someone born in **${birthYear}**:
                     - **The Chinese Zodiac:** (Just the name of that Chinese Zodiac)
-                    - **Lucky Color of the Year:** (Just the color name) 
+                    - **Lucky Color of the Year:** (Just the color name)
                     - **Personality Traits:** (3 concise adjectives)
+<<<<<<< HEAD
                     - **Special Fortune of the Year:** (3 sentence includes good things for 2 sentences, and one sentence for some concern.)`
+=======
+                    - **Special Fortune of the Year:** (3 sentences: two positive, one cautionary.)`
+>>>>>>> d09f474 (Fixed API key issue and prepared for deployment)
                 }
             ],
             max_tokens: 150,
@@ -63,7 +73,11 @@ app.get("/api/test", (req, res) => {
 });
 
 // Start Server
+<<<<<<< HEAD
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+=======
+app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));
+>>>>>>> d09f474 (Fixed API key issue and prepared for deployment)

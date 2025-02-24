@@ -40,7 +40,7 @@ app.post("/zodiac", async (req, res) => {
                     - **The Chinese Zodiac:** (Just the name of that Chinese Zodiac)
                     - **Lucky Color of the Year:** (Just the color name) 
                     - **Personality Traits:** (3 concise adjectives)
-                    - **Special Fortune of the Year:** (3 sentence includes good things for 2 sentences, and one sentence for some concern. )`
+                    - **Special Fortune of the Year:** (3 sentence includes good things for 2 sentences, and one sentence for some concern.)`
                 }
             ],
             max_tokens: 150,
@@ -57,6 +57,13 @@ app.post("/zodiac", async (req, res) => {
     }
 });
 
+// Test Route
+app.get("/api/test", (req, res) => {
+    res.json({ message: "Backend is working!" });
+});
+
 // Start Server
-const PORT = 3000;
-app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+});

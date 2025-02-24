@@ -6,7 +6,7 @@ const cors = require("cors");
 const OpenAI = require("openai");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Ensure API Key is loaded
 const apiKey = process.env.OPENAI_API_KEY;
@@ -46,11 +46,7 @@ app.post("/zodiac", async (req, res) => {
                     - **The Chinese Zodiac:** (Just the name of that Chinese Zodiac)
                     - **Lucky Color of the Year:** (Just the color name)
                     - **Personality Traits:** (3 concise adjectives)
-<<<<<<< HEAD
-                    - **Special Fortune of the Year:** (3 sentence includes good things for 2 sentences, and one sentence for some concern.)`
-=======
                     - **Special Fortune of the Year:** (3 sentences: two positive, one cautionary.)`
->>>>>>> d09f474 (Fixed API key issue and prepared for deployment)
                 }
             ],
             max_tokens: 150,
@@ -73,11 +69,6 @@ app.get("/api/test", (req, res) => {
 });
 
 // Start Server
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
-=======
-app.listen(PORT, () => console.log(`🚀 Backend running on http://localhost:${PORT}`));
->>>>>>> d09f474 (Fixed API key issue and prepared for deployment)
